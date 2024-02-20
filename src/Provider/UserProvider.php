@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Knp\DoctrineBehaviors\Provider;
 
+use Symfony\Bundle\SecurityBundle\Security;
 use Knp\DoctrineBehaviors\Contract\Provider\UserProviderInterface;
-use Symfony\Component\Security\Core\Security;
 
 final class UserProvider implements UserProviderInterface
 {
