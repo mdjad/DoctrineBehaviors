@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Knp\DoctrineBehaviors\EventSubscriber;
 
-use Doctrine\ORM\Events;
-use Doctrine\ORM\UnitOfWork;
+use Doctrine\Bundle\DoctrineBundle\Attribute\AsDoctrineListener;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\Mapping\ClassMetadataInfo;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
+use Doctrine\ORM\Events;
+use Doctrine\ORM\Mapping\ClassMetadataInfo;
+use Doctrine\ORM\UnitOfWork;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
 use Knp\DoctrineBehaviors\Contract\Entity\BlameableInterface;
-use Doctrine\Bundle\DoctrineBundle\Attribute\AsDoctrineListener;
 use Knp\DoctrineBehaviors\Contract\Provider\UserProviderInterface;
 
 #[AsDoctrineListener(event: Events::loadClassMetadata)]

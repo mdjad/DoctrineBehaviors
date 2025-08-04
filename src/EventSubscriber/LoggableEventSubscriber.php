@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Knp\DoctrineBehaviors\EventSubscriber;
 
-use Psr\Log\LogLevel;
+use Doctrine\Bundle\DoctrineBundle\Attribute\AsDoctrineListener;
 use Doctrine\ORM\Events;
-use Psr\Log\LoggerInterface;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
 use Knp\DoctrineBehaviors\Contract\Entity\LoggableInterface;
-use Doctrine\Bundle\DoctrineBundle\Attribute\AsDoctrineListener;
+use Psr\Log\LoggerInterface;
+use Psr\Log\LogLevel;
 
 #[AsDoctrineListener(event: Events::postPersist)]
 #[AsDoctrineListener(event: Events::postUpdate)]

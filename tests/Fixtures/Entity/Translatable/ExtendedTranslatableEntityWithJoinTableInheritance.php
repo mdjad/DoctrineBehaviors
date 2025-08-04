@@ -14,9 +14,6 @@ class ExtendedTranslatableEntityWithJoinTableInheritance extends TranslatableEnt
     #[Column(type: 'string')]
     private ?string $untranslatedField = null;
 
-    /**
-     * @throws ShouldNotHappenException
-     */
     public function getUntranslatedField(): string
     {
         if ($this->untranslatedField === null) {

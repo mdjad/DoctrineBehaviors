@@ -16,7 +16,7 @@ use Knp\DoctrineBehaviors\Model\Translatable\TranslationTrait;
 
 #[Entity]
 #[InheritanceType(value: 'JOINED')]
-#[DiscriminatorColumn(name:'handle', type:'string')]
+#[DiscriminatorColumn(name: 'handle', type: 'string')]
 class TranslatableEntityWithJoinTableInheritanceTranslation implements TranslationInterface
 {
     use TranslationTrait;
@@ -34,9 +34,6 @@ class TranslatableEntityWithJoinTableInheritanceTranslation implements Translati
         return $this->id;
     }
 
-    /**
-     * @throws ShouldNotHappenException
-     */
     public function getTitle(): string
     {
         if ($this->title === null) {

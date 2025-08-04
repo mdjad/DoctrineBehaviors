@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Knp\DoctrineBehaviors\EventSubscriber;
 
-use Doctrine\ORM\Events;
-use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
-use Knp\DoctrineBehaviors\Contract\Entity\TreeNodeInterface;
 use Doctrine\Bundle\DoctrineBundle\Attribute\AsDoctrineListener;
+use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
+use Doctrine\ORM\Events;
+use Knp\DoctrineBehaviors\Contract\Entity\TreeNodeInterface;
 
 #[AsDoctrineListener(event: Events::loadClassMetadata)]
 final class TreeEventSubscriber

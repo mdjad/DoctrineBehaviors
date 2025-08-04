@@ -57,7 +57,7 @@ final class BlameableTest extends AbstractBehaviorTestCase
 
         $id = $entity->getId();
         $createdBy = $entity->getCreatedBy();
-//        $this->entityManager->clear();
+        //        $this->entityManager->clear();
 
         $this->userProvider->changeUser('user2');
 
