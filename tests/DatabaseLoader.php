@@ -8,7 +8,7 @@ use Doctrine\DBAL\Connection;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Tools\SchemaTool;
 
-final class DatabaseLoader
+final readonly class DatabaseLoader
 {
     public function __construct(
         private EntityManagerInterface $entityManager,

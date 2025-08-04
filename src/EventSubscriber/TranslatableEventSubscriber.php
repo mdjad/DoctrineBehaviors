@@ -18,7 +18,7 @@ use Knp\DoctrineBehaviors\Contract\Provider\LocaleProviderInterface;
 #[AsDoctrineListener(event: Events::loadClassMetadata)]
 #[AsDoctrineListener(event: Events::postLoad)]
 #[AsDoctrineListener(event: Events::prePersist)]
-final class TranslatableEventSubscriber
+final readonly class TranslatableEventSubscriber
 {
     /**
      * @var string

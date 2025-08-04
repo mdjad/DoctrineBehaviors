@@ -14,7 +14,7 @@ use Doctrine\Bundle\DoctrineBundle\Attribute\AsDoctrineListener;
 #[AsDoctrineListener(event: Events::postPersist)]
 #[AsDoctrineListener(event: Events::postUpdate)]
 #[AsDoctrineListener(event: Events::preRemove)]
-final class LoggableEventSubscriber
+final readonly class LoggableEventSubscriber
 {
     public function __construct(
         private LoggerInterface $logger

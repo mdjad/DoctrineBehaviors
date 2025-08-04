@@ -18,7 +18,7 @@ use PHPStan\Type\Type;
 use PHPStan\Type\TypeCombinator;
 use function in_array;
 
-final class TranslatableGetTranslationsDynamicMethodReturnTypeExtension implements DynamicMethodReturnTypeExtension
+final readonly class TranslatableGetTranslationsDynamicMethodReturnTypeExtension implements DynamicMethodReturnTypeExtension
 {
     public function __construct(
         private ReflectionProvider $reflectionProvider

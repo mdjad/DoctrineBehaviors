@@ -16,7 +16,7 @@ use Knp\DoctrineBehaviors\Repository\DefaultSluggableRepository;
 #[AsDoctrineListener(event: Events::loadClassMetadata)]
 #[AsDoctrineListener(event: Events::prePersist)]
 #[AsDoctrineListener(event: Events::preUpdate)]
-final class SluggableEventSubscriber
+final readonly class SluggableEventSubscriber
 {
     /**
      * @var string

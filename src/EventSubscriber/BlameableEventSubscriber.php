@@ -18,7 +18,7 @@ use Knp\DoctrineBehaviors\Contract\Provider\UserProviderInterface;
 #[AsDoctrineListener(event: Events::prePersist)]
 #[AsDoctrineListener(event: Events::preUpdate)]
 #[AsDoctrineListener(event: Events::preRemove)]
-final class BlameableEventSubscriber
+final readonly class BlameableEventSubscriber
 {
     /**
      * @var string

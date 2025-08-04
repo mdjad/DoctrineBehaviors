@@ -10,7 +10,7 @@ use Doctrine\Bundle\DoctrineBundle\Attribute\AsDoctrineListener;
 use Knp\DoctrineBehaviors\Contract\Entity\TimestampableInterface;
 
 #[AsDoctrineListener(event: Events::loadClassMetadata)]
-final class TimestampableEventSubscriber
+final readonly class TimestampableEventSubscriber
 {
     public function __construct(
         private string $timestampableDateFieldType
