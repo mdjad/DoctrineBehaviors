@@ -76,35 +76,9 @@ includes:
     composer phpstan
     ```
 
-## Upgrade 1.x to 2
-
-There have been many changes between 1 and 2, but don't worry.
-This package uses [Rector](https://github.com/rectorphp/rector), that handles upgrade for you.
-
-```bash
-composer require rector/rector --dev
-```
-
-Create `rector.php` config:
-
-```bash
-vendor/bin/rector init
-```
-
-Add Doctrine Behaviors upgrade set to `rector.php`:
-
-```php
-use Rector\Core\Configuration\Option;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use Rector\Doctrine\Set\DoctrineSetList;
-
-return static function (ContainerConfigurator $containerConfigurator): void {
-    $containerConfigurator->import(DoctrineSetList::DOCTRINE_BEHAVIORS_20);
-};
-```
-
 Run Rector:
 
 ```bash
-vendor/bin/rector process src
+vendor/bin/rector --dry-run
+vendor/bin/rector
 ```
