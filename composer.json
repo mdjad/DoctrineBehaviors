@@ -1,14 +1,14 @@
 {
-    "name": "mdjad/doctrine-behaviors",
+    "name": "knplabs/doctrine-behaviors",
     "description": "Doctrine Behavior Traits",
     "type": "symfony-bundle",
     "keywords": [
         "behaviors", "doctrine", "timestampable", "translatable", "blameable", "softdeletable", "tree", "uuid"
     ],
-    "homepage": "https://mdjad.net",
+    "homepage": "http://knplabs.com",
     "license": "MIT",
     "authors": [
-        { "name": "Mdjad", "homepage": "https://mdjad.net" }
+        { "name": "Knplabs", "homepage": "http://knplabs.com" }
     ],
     "require": {
         "php": ">=8.2",
