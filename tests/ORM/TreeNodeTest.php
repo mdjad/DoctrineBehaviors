@@ -5,12 +5,13 @@ declare(strict_types=1);
 namespace Knp\DoctrineBehaviors\Tests\ORM;
 
 use Iterator;
-use Knp\DoctrineBehaviors\Contract\Entity\TreeNodeInterface;
+use Nette\Utils\Json;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Knp\DoctrineBehaviors\Exception\TreeException;
 use Knp\DoctrineBehaviors\Tests\AbstractBehaviorTestCase;
+use Knp\DoctrineBehaviors\Contract\Entity\TreeNodeInterface;
 use Knp\DoctrineBehaviors\Tests\Fixtures\Entity\TreeNodeEntity;
 use Knp\DoctrineBehaviors\Tests\Fixtures\Repository\TreeNodeRepository;
-use Nette\Utils\Json;
 
 final class TreeNodeTest extends AbstractBehaviorTestCase
 {
@@ -115,17 +116,15 @@ final class TreeNodeTest extends AbstractBehaviorTestCase
         $treeNodeEntity->setMaterializedPath('/0/1/2/3/4/5/6/');
     }
 
-    /**
-     * @dataProvider provideIsChildNodeOf()
-     */
+    #[DataProvider('provideIsChildNodeOf')]
     public function testTestisChildNodeOf(TreeNodeInterface $child, TreeNodeInterface $parent, bool $expected): void
     {
         $this->assertSame($expected, $child->isChildNodeOf($parent));
     }
 
-    public function provideIsChildNodeOf(): Iterator
+    public static function provideIsChildNodeOf(): Iterator
     {
-        $treeNodeEntity = $this->buildTree();
+        $treeNodeEntity = self::buildTree();
 
         yield [$treeNodeEntity[0][0], $treeNodeEntity[0], true];
         yield [$treeNodeEntity[0][0][0], $treeNodeEntity[0][0], true];
@@ -376,7 +375,7 @@ final class TreeNodeTest extends AbstractBehaviorTestCase
         $this->assertSame($tree[0][0], $entity[0][0]);
     }
 
-    private function buildTree(): TreeNodeEntity
+    private static function buildTree(): TreeNodeEntity
     {
         $item = new TreeNodeEntity();
         $item->setMaterializedPath('');

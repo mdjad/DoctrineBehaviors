@@ -16,7 +16,7 @@ final readonly class DatabaseLoader
     ) {
         // @see https://stackoverflow.com/a/35222045/1348344
         $configuration = $connection->getConfiguration();
-        $configuration->setSQLLogger();
+        $configuration->setMiddlewares([]);
     }
 
     public function reload(): void
@@ -24,6 +24,7 @@ final readonly class DatabaseLoader
         $classMetadataFactory = $this->entityManager->getMetadataFactory();
 
         $classesMetadatas = $classMetadataFactory->getAllMetadata();
+        $this->entityManager->getProxyFactory()->generateProxyClasses($classesMetadatas);
 
         $entityClasses = [];
         foreach ($classesMetadatas as $classMetadata) {

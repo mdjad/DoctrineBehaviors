@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-use Knp\DoctrineBehaviors\Contract\Provider\LocaleProviderInterface;
+use Psr\Log\Test\TestLogger;
+use Symfony\Bundle\SecurityBundle\Security;
+use Knp\DoctrineBehaviors\Tests\DatabaseLoader;
+use Knp\DoctrineBehaviors\Tests\Provider\TestUserProvider;
+use Knp\DoctrineBehaviors\Tests\Provider\TestLocaleProvider;
 use Knp\DoctrineBehaviors\Contract\Provider\UserProviderInterface;
 use Knp\DoctrineBehaviors\EventSubscriber\LoggableEventSubscriber;
-use Knp\DoctrineBehaviors\Tests\DatabaseLoader;
-use Knp\DoctrineBehaviors\Tests\Provider\TestLocaleProvider;
-use Knp\DoctrineBehaviors\Tests\Provider\TestUserProvider;
-use Psr\Log\Test\TestLogger;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use Symfony\Component\Security\Core\Security;
+use Knp\DoctrineBehaviors\Contract\Provider\LocaleProviderInterface;
 use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
+use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
     $parameters = $containerConfigurator->parameters();
@@ -58,6 +58,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'memory' => '%env(bool:DB_MEMORY)%',
         ],
         'orm' => [
+            'auto_generate_proxy_classes' => true,
+            'proxy_dir' => sys_get_temp_dir() . '/doctrine_behaviors_test/doctrine/orm/Proxies',
             'auto_mapping' => true,
             'mappings' => [
                 [

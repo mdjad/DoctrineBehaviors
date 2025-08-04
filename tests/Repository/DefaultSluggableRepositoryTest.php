@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Knp\DoctrineBehaviors\Tests\Repository;
 
-use Doctrine\ORM\AbstractQuery;
-use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\Mapping\ClassMetadata;
+use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
+use PHPUnit\Framework\TestCase;
+use Doctrine\ORM\Mapping\ClassMetadata;
+use Doctrine\ORM\EntityManagerInterface;
+use PHPUnit\Framework\MockObject\MockObject;
 use Knp\DoctrineBehaviors\Contract\Entity\SluggableInterface;
 use Knp\DoctrineBehaviors\Repository\DefaultSluggableRepository;
-use PHPUnit\Framework\MockObject\MockObject;
-use PHPUnit\Framework\TestCase;
 
 final class DefaultSluggableRepositoryTest extends TestCase
 {
@@ -65,17 +65,23 @@ final class DefaultSluggableRepositoryTest extends TestCase
 
         $queryBuilder->expects(self::exactly(2))
             ->method('andWhere')
-            ->withConsecutive(['e.slug = :slug'], ['e.id.id != :id_id'])
+            ->with(self::callback(function ($where) {
+                return $where === 'e.slug = :slug' || $where === 'e.id.id != :id_id';
+            }))
             ->willReturnSelf();
 
         $queryBuilder->expects(self::exactly(2))
             ->method('setParameter')
-            ->withConsecutive(['slug', $uniqueSlug], ['id_id', '123'])
+            ->with(self::callback(function ($param) use ($uniqueSlug) {
+                return $param === 'slug' || $param === 'id_id';
+            }), self::callback(function ($value) use ($uniqueSlug) {
+                return $value === $uniqueSlug || $value === '123';
+            }))
             ->willReturnSelf();
 
         $queryBuilder->expects(self::once())
             ->method('getQuery')
-            ->willReturn($query = $this->createMock(AbstractQuery::class));
+            ->willReturn($query = $this->createMock(Query::class));
 
         $query->expects(self::once())
             ->method('getSingleScalarResult')

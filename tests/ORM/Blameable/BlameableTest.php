@@ -79,8 +79,9 @@ final class BlameableTest extends AbstractBehaviorTestCase
         );
         $this->assertSame('"COMMIT"', $debugStack->queries[3]['sql']);
 
-        /** @var BlameableEntity $entity */
+        /** @var BlameableEntity|null $entity */
         $entity = $this->blameableRepository->find($id);
+        $this->assertNotNull($entity, 'L\'entité BlameableEntity n\'a pas été retrouvée en base.');
 
         $createdBy = $entity->getCreatedBy();
         $this->assertInstanceOf(UserEntity::class, $createdBy);

@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace Knp\DoctrineBehaviors\Tests;
 
 use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\Logging\DebugStack;
-use Doctrine\DBAL\Platforms\PostgreSQL94Platform;
-use Doctrine\ORM\EntityManagerInterface;
-use Knp\DoctrineBehaviors\Tests\HttpKernel\DoctrineBehaviorsKernel;
 use PHPUnit\Framework\TestCase;
+use Doctrine\DBAL\Logging\DebugStack;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\DBAL\Platforms\PostgreSQLPlatform;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Knp\DoctrineBehaviors\Tests\HttpKernel\DoctrineBehaviorsKernel;
 
 abstract class AbstractBehaviorTestCase extends TestCase
 {
@@ -23,6 +23,11 @@ abstract class AbstractBehaviorTestCase extends TestCase
 
     protected function setUp(): void
     {
+        $proxyDir = sys_get_temp_dir() . '/doctrine_behaviors_test/doctrine/orm/Proxies';
+        if (!is_dir($proxyDir)) {
+            mkdir($proxyDir, 0777, true);
+        }
+
         $doctrineBehaviorsKernel = new DoctrineBehaviorsKernel($this->provideCustomConfigs());
         $doctrineBehaviorsKernel->boot();
 
@@ -44,7 +49,7 @@ abstract class AbstractBehaviorTestCase extends TestCase
         /** @var Connection $connection */
         $connection = $this->entityManager->getConnection();
 
-        return $connection->getDatabasePlatform() instanceof PostgreSQL94Platform;
+        return $connection->getDatabasePlatform() instanceof PostgreSQLPlatform;
     }
 
     /**
